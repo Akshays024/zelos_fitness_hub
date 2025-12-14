@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Zelo’s Fitness Hub | Women-Only Premium Fitness Studio</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Zelo’s Fitness Hub – Premium women-only fitness studio in Alanallur, Kerala. 5-star rated, safe and modern.">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ================= THEME VARIABLES ================= */
+:root{
+--bg:#0f1412;
+--panel:#151c19;
+--text:#e9eceb;
+--muted:#a7b0ab;
+--accent:#2bbf8e;
+--card:#1b2320;
+--footer:#0b0f0d;
+}
+
+body.light{
+--bg:#f6f8f7;
+--panel:#ffffff;
+--text:#1e1e1e;
+--muted:#5e6b66;
+--accent:#1f9f78;
+--card:#ffffff;
+--footer:#e9eeec;
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+font-family:'Montserrat',sans-serif;
+background:var(--bg);
+color:var(--text);
+line-height:1.6;
+overflow-x:hidden;
+transition:background .4s,color .4s;
+}
+
+/* ================= GLOBAL ANIMATED BACKGROUND ================= */
+.bg-motion-global{
+position:fixed;
+inset:0;
+z-index:0;
+pointer-events:none;
+overflow:hidden;
+}
+
+.equipment{
+position:absolute;
+width:120px;
+height:36px;
+border-radius:20px;
+background:rgba(43,191,142,.10);
+filter:blur(2px);
+animation:float linear infinite;
+}
+
+.equipment::before,
+.equipment::after{
+content:"";
+position:absolute;
+width:28px;
+height:28px;
+border-radius:50%;
+background:inherit;
+top:4px;
+}
+
+.equipment::before{left:-14px}
+.equipment::after{right:-14px}
+
+.eq1{top:10%;left:-20%;animation-duration:28s}
+.eq2{top:30%;left:-30%;animation-duration:36s;opacity:.08}
+.eq3{top:55%;left:-25%;animation-duration:44s}
+.eq4{top:75%;left:-35%;animation-duration:52s;opacity:.07}
+.eq5{top:90%;left:-40%;animation-duration:60s}
+
+@keyframes float{
+from{transform:translateX(0)}
+to{transform:translateX(160vw)}
+}
+
+/* ================= NAVBAR ================= */
+nav{
+position:fixed;
+top:0;width:100%;
+background:rgba(15,20,18,.92);
+backdrop-filter:blur(8px);
+padding:16px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+transition:background .4s;
+}
+
+body.light nav{
+background:rgba(255,255,255,.92);
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+/* Animated Logo */
+.logo svg{
+width:34px;
+height:34px;
+animation:spin 8s linear infinite;
+}
+
+@keyframes spin{
+from{transform:rotate(0deg)}
+to{transform:rotate(360deg)}
+}
+
+nav h1{
+font-size:1.4rem;
+font-weight:700;
+letter-spacing:.6px;
+color:var(--accent);
+}
+
+nav a{
+margin-left:24px;
+color:var(--text);
+text-decoration:none;
+font-weight:500;
+}
+
+.toggle{
+margin-left:20px;
+padding:6px 14px;
+border-radius:20px;
+border:1.5px solid var(--accent);
+background:none;
+color:var(--accent);
+font-weight:600;
+cursor:pointer;
+}
+
+/* ================= CONTENT LAYER ================= */
+.page{
+position:relative;
+z-index:2;
+}
+
+/* ================= HERO ================= */
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+padding:0 8%;
+background:
+linear-gradient(rgba(15,20,18,.85),rgba(15,20,18,.85)),
+url("https://images.unsplash.com/photo-1594737625785-c8c3b04f1d5f?auto=format&fit=crop&w=1600&q=80") center/cover;
+}
+
+.hero-content{max-width:620px}
+
+.animate{
+opacity:0;
+transform:translateY(24px);
+animation:rise .9s ease forwards;
+}
+
+.delay-1{animation-delay:.3s}
+.delay-2{animation-delay:.6s}
+.delay-3{animation-delay:.9s}
+
+@keyframes rise{
+to{opacity:1;transform:none}
+}
+
+.hero h2{
+font-size:3rem;
+line-height:1.15;
+font-weight:700;
+}
+
+.hero p{
+margin:22px 0;
+color:var(--muted);
+}
+
+/* ================= BUTTONS ================= */
+.btn{
+display:inline-block;
+padding:14px 34px;
+border-radius:6px;
+font-weight:600;
+text-decoration:none;
+transition:.25s ease;
+}
+
+.btn-primary{
+background:var(--accent);
+color:#000;
+}
+
+.btn-outline{
+border:1.6px solid var(--accent);
+color:var(--accent);
+margin-left:14px;
+}
+
+/* ================= SECTIONS ================= */
+section{
+padding:90px 8%;
+opacity:0;
+transform:translateY(30px);
+transition:.8s ease;
+}
+
+section.show{opacity:1;transform:none}
+
+.section-title{
+font-size:2.2rem;
+text-align:center;
+margin-bottom:50px;
+}
+
+/* ================= GRID & CARDS ================= */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+}
+
+.card{
+background:var(--card);
+padding:36px;
+border-radius:14px;
+transition:.3s;
+}
+
+/* ================= GALLERY ================= */
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:22px;
+}
+
+.gallery img{
+width:100%;
+height:240px;
+object-fit:cover;
+border-radius:14px;
+}
+
+/* ================= CONTACT ================= */
+iframe{
+width:100%;
+height:320px;
+border-radius:14px;
+border:none;
+}
+
+/* ================= FOOTER ================= */
+footer{
+background:var(--footer);
+padding:26px;
+text-align:center;
+color:var(--muted);
+transition:background .4s;
+}
+
+/* ================= WHATSAPP BUTTON ================= */
+.whatsapp-float{
+position:fixed;
+bottom:22px;
+right:22px;
+width:58px;
+height:58px;
+background:#25D366;
+color:white;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+z-index:9999;
+box-shadow:0 12px 30px rgba(0,0,0,.35);
+transition:.3s ease;
+cursor:pointer;
+}
+
+.whatsapp-float:hover{transform:scale(1.08)}
+
+.whatsapp-float span{
+position:absolute;
+right:70px;
+background:#111;
+color:white;
+padding:6px 12px;
+border-radius:6px;
+font-size:13px;
+opacity:0;
+pointer-events:none;
+white-space:nowrap;
+transition:.3s;
+}
+
+.whatsapp-float:hover span{opacity:1}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.hero h2{font-size:2.3rem}
+}
+</style>
+</head>
+
+<body>
+
+<!-- GLOBAL ANIMATED BACKGROUND -->
+<div class="bg-motion-global">
+<div class="equipment eq1"></div>
+<div class="equipment eq2"></div>
+<div class="equipment eq3"></div>
+<div class="equipment eq4"></div>
+<div class="equipment eq5"></div>
+</div>
+
+<nav>
+<div class="brand">
+<div class="logo">
+<svg viewBox="0 0 100 100">
+<circle cx="50" cy="50" r="44" stroke="var(--accent)" stroke-width="8" fill="none"/>
+<path d="M30 50h40" stroke="var(--accent)" stroke-width="8"/>
+</svg>
+</div>
+<h1>Zelo’s Fitness Hub</h1>
+</div>
+<div>
+<a href="#programs">Programs</a>
+<a href="#gallery">Gallery</a>
+<a href="#contact">Visit</a>
+<button class="toggle" onclick="toggleTheme()">Theme</button>
+</div>
+</nav>
+
+<div class="page">
+
+<div class="hero">
+<div class="hero-content">
+<h2 class="animate delay-1">Premium Fitness.<br>Designed Exclusively for Women.</h2>
+<p class="animate delay-2">
+A modern women-only fitness studio in Alanallur focused on strength,
+wellness, privacy and confidence.
+</p>
+<a href="#contact" class="btn btn-primary animate delay-3">Join the Studio</a>
+<a href="tel:+91XXXXXXXXXX" class="btn btn-outline animate delay-3">Call</a>
+<p class="animate delay-3" style="margin-top:14px;color:#9be6c9;">
+★★★★★ 5.0 · 29 Reviews
+</p>
+</div>
+</div>
+
+<section>
+<h2 class="section-title">Why Zelo’s Fitness Hub</h2>
+<div class="grid">
+<div class="card">Women-Only Private Space</div>
+<div class="card">Premium Modern Interiors</div>
+<div class="card">5-Star Trusted Studio</div>
+<div class="card">Supportive & Calm Training</div>
+</div>
+</section>
+
+<section id="programs">
+<h2 class="section-title">Programs</h2>
+<div class="grid">
+<div class="card">Strength & Sculpt</div>
+<div class="card">Cardio Conditioning</div>
+<div class="card">Weight Management</div>
+<div class="card">Wellness Fitness</div>
+</div>
+</section>
+
+<section id="gallery">
+<h2 class="section-title">Studio Gallery</h2>
+<div class="gallery">
+<img src="https://media.istockphoto.com/id/1187121639/photo/woman-does-squats-workout-with-a-barbell-in-a-gymnasium-for-fitness.webp?a=1&b=1&s=612x612&w=0&k=20&c=rbUSv0ZpbAira8UxA6lj3fXlOHUTPNt29iPLfrRDNN0=">
+<img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=1200&q=80">
+<img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=1200&q=80">
+</div>
+</section>
+
+<section id="contact">
+<h2 class="section-title">Visit the Studio</h2>
+<div class="grid">
+<div>
+<p><strong>Address</strong><br>Road, Kannamkundu, Alanallur-I, Kerala 678601</p>
+<p><strong>Opens</strong><br>6:00 AM</p>
+</div>
+<iframe src="https://maps.google.com/maps?q=287W%2B84%20Alanallur%20Kerala&output=embed"></iframe>
+</div>
+</section>
+
+<footer>
+© 2025 Zelo’s Fitness Hub · Women-Only Premium Fitness Studio · Kerala
+</footer>
+
+</div>
+
+<!-- WHATSAPP BUTTON -->
+<div class="whatsapp-float" onclick="openWhatsApp()">
+💬
+<span>Chat on WhatsApp</span>
+</div>
+
+<script>
+/* SECTION REVEAL */
+const sections=document.querySelectorAll("section");
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){e.target.classList.add("show")}
+})
+},{threshold:0.12});
+sections.forEach(s=>observer.observe(s));
+
+/* THEME TOGGLE */
+function toggleTheme(){
+document.body.classList.toggle("light");
+localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");
+}
+if(localStorage.getItem("theme")==="light"){
+document.body.classList.add("light");
+}
+
+/* WHATSAPP FUNCTION */
+function openWhatsApp(){
+const msg = encodeURIComponent(
+"Hello Zelo’s Fitness Hub 👋\nI would like to enquire about:\n• Membership plans\n• Timings\n• Trial session"
+);
+window.open("https://wa.me/919999999999?text="+msg,"_blank");
+}
+</script>
+
+</body>
+</html>
